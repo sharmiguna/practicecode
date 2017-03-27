@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="userCtrl">
+<h1> Welcome to my Github Info page</h1>
+
+<label for="username">User Name</label>
+<input type="text" ng-model="username" name="username" id="userName"/>
+ 	<button class="w3-btn w3-black w3-ripple" ng-click="display()">&#10004; Retrieve Information </button>
+ <div id="data" ng-if="getSuccess" style="font-family: Comic Sans MS, cursive, sans-serif; font-size:14 ; font-weight: bold; color: blue;"> 	
+ 	<span style="color:black"> Id is :</span>
+ 	<span> {{data.id}}</span>
+ 	<br>
+ 	<span style="color:black"> UserName is :</span>
+ 	<span> {{data.login}}</span>
+ 	<br>
+ 	<span style="color:black"> Name is :</span>
+ 	<span> {{data.name}}</span>
+ 	<br>
+ 	<span style="color:black"> Number of followers:</span>
+ 	<span> {{data.followers}}</span>
+ 	<br>
+ 	<span style="color:black"> Url is :</span>
+ 	<span> {{data.url}}</span>
+ 	<br>
+ </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	var app = angular.module('myApp',[]);
+	  app.controller('userCtrl',function($scope, $http)
+	  {
+	  		$scope.getSuccess = false;
+		  	$scope.display=function()
+		  	{
+		  		$scope.data = '';
+		  		var url =  'https://api.github.com/users/' +$scope.username;
+
+		  		var request = $http.get(url)
+		  			.then(function(response) 
+		  			{
+		  				// $scope.statuscode=response.status;
+		  				// $scope.statustext = response.statustext;		  		
+		  				// console.log($scope.statuscode);
+		  				// console.log($scope.statustext);
+		  				$scope.getSuccess = true;
+		  				// if($scope.statuscode == 404)
+		  				// 	alert("User not available");
+		  				// else
+		  				// {
+		  				$scope.data = response.data;
+		  				console.log($scope.data);
+		  		        //}
+		  		},
+		  		function(err)
+		  		{
+		  			if(err.status == 404)
+		  			{
+		  				alert("user not available");
+		  			}
+		  		}
+
+		  		);
+
+
+		  			
+
+		  	}
+	  });
+
+
+</script>
+
+</body>
+</html>

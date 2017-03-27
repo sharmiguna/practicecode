@@ -1,0 +1,39 @@
+.resultDesign
+{
+	background: #689986;
+	height: 40px;
+	width: 100%;
+	font-size: 14;
+}
+
+p
+{
+	font-size: 12px;
+}
+
+#borderDesign
+{
+	margin-left: 30%;
+	border: 10px solid #c4c6c6;
+	background-color: white;
+	width: 35%;
+
+}
+
+.buttonDesign
+{
+	background-color: white;
+	padding: 5px;
+	border:2px solid #75787c;
+	color:black;
+	text-align: center;
+}
+
+button
+{
+	width: 100%;
+	
+		background-color: #c4c6c6;
+
+	
+}

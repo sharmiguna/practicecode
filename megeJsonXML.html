@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="userCtrl">
+<head>
+	
+</head>
+
+
+<body>
+<h1> XMl and Json array </h1>
+<br>
+<h3> Click</h3>
+<button ng-click="readXML()"> Load XML file </button>
+<br>
+<div>
+<ul>
+<li ng-repeat = "data in xmlData">
+{{xmlArray.firstname}}
+</li>
+</ul>
+</div>
+<!-- <table class="w3-table w3-bordered w3-striped" id="userTable">
+	<tr>
+	<th> Id </th>
+	<th> Firstname </th>
+	<th>Last Name </th>
+	</tr>
+	<tr ng-repeat="user in users" | orderBy:user.id>
+	<td> {{user.id}} </td>
+	<td> {{user.firstname}} </td>
+	<td> {{user.lastname}} </td>
+	</tr>
+</table> -->
+
+
+<script type="text/javascript">
+	var app=angular.module('myApp',[])
+	app.controller('userCtrl',function($scope,$http)
+	{
+		$scope.readXML = function()
+		{
+			$http.get('http://localhost/myxml').then(function(response) {
+				console.log(response);
+			});
+		};			
+
+	});
+
+
+</script>
+
+</body>
+</html>

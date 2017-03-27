@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<persons>
+	<person>
+		<id> 3 </id>
+		<firstname>Jen</firstname>
+		<lastname> Doe </lastname>
+	</person>
+	<person>
+		<id> 6 </id>
+		<firstname>Stephanie</firstname>
+		<lastname>Joe</lastname>
+	</person>
+	<person>
+		<id>1</id>
+		<firstname>Victoria</firstname>
+		<lastname>Doe</lastname>
+	</person>
+</persons>

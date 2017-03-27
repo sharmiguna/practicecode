@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html ng-app="Calculator">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+	<link rel="stylesheet" type="text/css" href="C:\Users\shrmg\OneDrive\Documents\practisefullstack\angularJs practice\calculator.css">
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>
+		Angular js example calculator
+	</title>
+</head>
+<body id="borderDesign">
+<div ng-controller = "CalculatorCtrl" >
+	<div class="resultDesign">
+		<p ng-bind="show">
+        <br> {{result}} </p>
+    </div>	
+	
+	<div class="buttonDesign">
+		<div class ="row" style="width: 100%;padding: 5px;"">
+			<div class="col-md-8">
+				<div class = "row">
+					<div class = "col-md-4">
+						<button name="btn7" class="operands" value="7" ng-click='display(7)'>
+						 7</button>
+						 <br>
+						 <button name="btn4" class="operands" value="4" ng-click='display(4)'>
+						 4</button>
+						 <br>
+						 <button name="btn1" class="operands" value="1" ng-click='display(1)'>
+						 1</button>
+						 <br>
+						 <button name="btn0" class="operands" value="0" ng-click='display(0)'>
+						 0</button>
+						 <br>
+					</div>
+					<div class = "col-md-4">
+						<button name="btn8" class="operands"  value="8" ng-click='display(8)'>
+						 8</button>
+						 <br>
+						 <button name="btn5" class="operands" value="5" ng-click='display(5)'>
+						 5</button>
+						 <br>
+						 <button name="btn2" class="operands" value="2" ng-click='display(2)'>
+						 2</button>
+						 <br>
+						  <button name="btn00" class="operands" value="00" ng-click='display(00)'>
+						 00</button>
+						 <br>
+					</div>
+					<div class = "col-md-4">
+						 <button name="btn9" class="operands" value="9" ng-click='display(9)'>
+						 9</button>
+						 <br>
+						 <button name="btn6" class="operands" value="6" ng-click='display(6)'>
+						 6</button>
+						 <br>
+						 <button name="btn3" class="operands" value="3" ng-click='display(3)'>
+						 3</button>
+						 <br>
+						 <button name="btn." class="operands" value="." ng-click='display(".")'>
+						 .</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-6">
+					<button name="btnSign" class="operators" value="+-" ng-click='display("+-")'>
+					 +-</button>					 
+					 <br>
+					 <button name="btnSub" class="operands" value="-" ng-click='display("-")'>
+					 -</button>
+					 <br>
+					 <button name="btnAdd" class="operands" value="+" ng-click='display("+")'>
+					+</button>
+					<br>
+				</div>
+				<div class="col-md-6">
+					<button name="btnC" class="operands" value="C" ng-click='clear()'>
+					C</button>
+					<button name="btnMul" class="operands" value="*" ng-click='display("*")'>
+				 	x</button>
+				 	<br>
+					<button name="btnDiv" class="operands" value="/" ng-click='display("/")'>
+				 	/</button>
+				 	<br>
+				 	<button name="btnEql" class="operands" value="=" ng-click='Calculate()'>
+					=</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+var app = angular.module('Calculator',[]);
+app.controller('CalculatorCtrl',function($scope)
+{
+	$scope.result = 0;
+	$scope.show = '0';
+	$scope.operation=null;
+	$scope.operand1 = null;
+	$scope.operand2 = null;
+
+	$scope.saveInMemory = function() {
+		if($scope.operand1 == null)
+		{
+			$scope.operand1 = parseFloat($scope.show);
+			return $scope.operand1;
+		}
+	};
+
+	$scope.display = function(btn)
+	{
+		if($scope.show == '0')
+		{
+			if(btn == '+-')
+				$scope.show = '-' ;
+			else
+			$scope.show = btn;
+		}
+
+		else 
+		{
+			// if(btn =='-')
+			//     $scope.show = '+';
+			 if(btn == '+' || btn == '-' || btn == '*' || btn== '/')
+			{
+				$scope.saveInMemory();
+				$scope.operation = String(btn);
+				$scope.show = 0;
+			}
+			else 
+				$scope.show += String(btn) ;
+		}
+	};
+
+	$scope.clear = function()
+	{
+		$scope.result = "0";
+		$scope.show = '0';
+		$scope.operation=null;
+		$scope.memory=null;
+		$scope.operand1=null;
+		$scope.operand2=null;
+	};
+
+	$scope.Calculate = function()
+	{
+		if($scope.show)
+		{
+			$scope.operand2=parseFloat($scope.show);
+			switch($scope.operation)
+			{
+			case '+':
+				$scope.result = $scope.operand1 + $scope.operand2;
+				break;
+			case '-':
+				$scope.result = $scope.operand1 - $scope.operand2;
+				break;
+			case '*':
+				$scope.result = $scope.operand1 * $scope.operand2;
+				break;
+			case '/':
+				$scope.result = $scope.operand1 / $scope.operand2;
+				break;
+			}
+		}
+	};
+
+} );
+				
+
+</script>
+</body>
+</html>
