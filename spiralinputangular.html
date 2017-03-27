@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+	
+</head>
+<body ng-app = 'myApp' ng-controller = 'myCtrl' style="background-color:grey; color:white" >
+<div>
+<br><br>
+<h1 style="font-family: georgia; color:black"> This is angular page</h1><br><br>
+<input type="text" name="input" value="" id="txtNum" ng-model='inputnum' />
+<label name="labelNum" for="txtNum" style="font-weight: bold;"> Enter the number</label>
+</br>
+</br></br>
+<button ng-click="postData()" id="btnSubmit"  value="Result ">
+	Submit
+</button>
+</br>
+</div>
+<div id="demo">
+<h3> Hello</h3>
+</div>
+
+<div>
+<table>
+	<tr ng-repeat = 'x in data'>
+		<td ng-repeat = 'y in x'> 
+		{{y}}
+		</td>
+	</tr>
+</table> 
+</div>
+
+<script type="text/javascript">
+	var app = angular.module('myApp',[]);
+	app.controller('myCtrl', function($scope, $http, $sce)
+	{
+		$scope.postData = function()
+		{
+			if(! Number.isInteger(parseFloat($scope.inputnum))) {
+				$scope.data = '';
+				alert("Error: Enter a whole number only. Special characters , letters and decimals not allowed.");
+			}
+			else
+			{
+			var url = "/spiralmatrixexpjs/angular/getData" + "?inp=" + 
+						$scope.inputnum ; 
+			var request = $http.get(url)
+				.then(function(response)
+				{
+					$scope.data = response.data;
+				},
+				function(err)
+				{
+					console.log(err);
+					if(err.status == 400)  {
+						$scope.data = '';
+						alert("Enter positive number");
+					}
+				}
+				);
+				
+			}
+		};	
+	});
+</script>
+</body>
+</html>

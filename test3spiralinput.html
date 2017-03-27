@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test 1</title>
+</head>
+<body>
+<div>
+<h2> my test 2d </h2>
+<input type="text" name="input" value="" id="txtNum">
+<label name="labelNum" for="txtNum"> Enter the number</label>
+</br>
+</br></br>
+<input type="button" onclick="postData()" name="submit" id="btnSubmit"  value="Result "></input>
+</br>
+</div>
+<div id="demo">
+<h3> Hello </h3>
+</div>
+
+<div id="demo1">
+</div>
+
+<script type="text/javascript">
+	var postData = function()
+	{
+		var valueInput = document.getElementById('txtNum').value;
+		var req = new XMLHttpRequest();
+		req.open("GET", "/spiralmatrixexpjs/test4/getData" + "?inp=" + valueInput);
+
+		req.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById('demo1').innerHTML = this.responseText;
+		    }
+		};
+
+		req.send();
+	};
+
+</script>
+</body>
+</html>
